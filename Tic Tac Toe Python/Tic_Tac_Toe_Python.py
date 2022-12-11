@@ -1,10 +1,14 @@
 import random
 
-
+# This class define the object TicTacToe game
+# the class define the function and Features of the game
 class TicTacToe:
+   # constratctor
     def __init__(self):
         self.board = []
 
+   # This function creating the Tic Tac Board
+   # The function getting Size range of the board and creating it
     def create_board(self):
         size = input("Enter Size: ")
         size = int(size)
@@ -13,18 +17,17 @@ class TicTacToe:
             for j in range(size):
                 row.append('-')
             self.board.append(row)
-
+   # This function choosing the player random
     def get_random_first_player(self):
         return random.randint(0, 1)
-
+   # This function marks the location the player selected
     def fix_spot(self, row, col, player):
         self.board[row][col] = player
-
+   # The function checks whether a certain player has won,
+   # the function checks on the board if there is a diagonal/straight/vertical line
     def is_player_win(self, player):
         win = None
-
         n = len(self.board)
-
         # checking rows
         for i in range(n):
             win = True
@@ -75,28 +78,28 @@ class TicTacToe:
                 if item == '-':
                     return False
         return True
-
+   # The function switches between the players' turns
     def swap_player_turn(self, player):
         return 'X' if player == 'O' else 'O'
-
+   # The function prints the current board
     def show_board(self):
         for row in self.board:
             for item in row:
                 print(item, end=" ")
             print()
 
+   # The main function that runs the game and manages the program,
+   # is responsible for the board and objects, uses and calls the program
+   # functions and at the end of the game ends and returns control to the
+   # main program and then the program ends
     def start(self):
         self.create_board()
-
         player = 'X' if self.get_random_first_player() == 1 else 'O'
         while True:
             print(f"Player {player} turn")
-
             self.show_board()
-
             # taking user input
-            row, col = list(
-                map(int, input("Enter row and column numbers Between 1-Size: ").split()))
+            row, col = list(map(int, input("Enter row and column numbers Between 1-Size: ").split()))
             print()
 
             # fixing the spot
@@ -114,13 +117,11 @@ class TicTacToe:
 
             # swapping the turn
             player = self.swap_player_turn(player)
-
         # showing the final view of board
         print()
         self.show_board()
 
-
-# starting the game
-
-tic_tac_toe = TicTacToe()
-tic_tac_toe.start()
+# ----------------------- Main -----------------------
+if __name__ == "__main__":
+   tic_tac_toe = TicTacToe()
+   tic_tac_toe.start()
